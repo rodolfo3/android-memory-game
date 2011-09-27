@@ -17,9 +17,9 @@ public final class R {
         public static final int american_gangster_icon=0x7f020003;
         public static final int angels_and_demons_icon=0x7f020004;
         public static final int apocalypto_icon=0x7f020005;
-        public static final int avatar_icon=0x7f020006;
-        public static final int b13_u_icon=0x7f020007;
-        public static final int baby_and_me_icon=0x7f020008;
+        public static final int b13_u_icon=0x7f020006;
+        public static final int baby_and_me_icon=0x7f020007;
+        public static final int back=0x7f020008;
         public static final int bangkok_dangerous_icon=0x7f020009;
         public static final int batman_begins_1_icon=0x7f02000a;
         public static final int batman_begins_2_icon=0x7f02000b;

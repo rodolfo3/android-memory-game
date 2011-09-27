@@ -7,15 +7,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+import android.util.Log;
+
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    private Integer[] pieces;
 
     public ImageAdapter(Context c) {
         mContext = c;
+        List ipieces = new ArrayList();
+        for(int i=0; i<12; i++) {
+            ipieces.add(i);
+            ipieces.add(i);
+        }
+        Collections.shuffle(ipieces);
+        pieces = (Integer[]) ipieces.toArray(new Integer[0]);
+
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return 24; //mThumbIds.length;
     }
 
     public Object getItem(int position) {
@@ -37,8 +52,9 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-
-        imageView.setImageResource(mThumbIds[position]);
+        int i = pieces[position];
+        Log.d("ImageAdapter", Integer.toString(i));
+        imageView.setImageResource(mThumbIds[i]);
         return imageView;
     }
 
@@ -48,7 +64,7 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.a_moment_icon,
             R.drawable.angels_and_demons_icon,
             R.drawable.apocalypto_icon,
-            R.drawable.avatar_icon,
+            R.drawable.i300_icon,
             R.drawable.b13_u_icon,
             R.drawable.baby_and_me_icon,
             R.drawable.bangkok_dangerous_icon,
@@ -56,29 +72,5 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.batman_begins_2_icon,
             R.drawable.batman_begins_3_icon,
             R.drawable.batman_dark_knight_icon,
-
-            R.drawable.american_gangster_icon,
-            R.drawable.a_moment_icon,
-            R.drawable.angels_and_demons_icon,
-            R.drawable.apocalypto_icon,
-            R.drawable.avatar_icon,
-            R.drawable.b13_u_icon,
-            R.drawable.baby_and_me_icon,
-            R.drawable.bangkok_dangerous_icon,
-            R.drawable.batman_begins_1_icon,
-            R.drawable.batman_begins_2_icon,
-            R.drawable.batman_begins_3_icon,
-            R.drawable.batman_dark_knight_icon,
-            // R.drawable.sample_2, R.drawable.sample_3,
-            // R.drawable.sample_4, R.drawable.sample_5,
-            // R.drawable.sample_6, R.drawable.sample_7,
-            // R.drawable.sample_0, R.drawable.sample_1,
-            // R.drawable.sample_2, R.drawable.sample_3,
-            // R.drawable.sample_4, R.drawable.sample_5,
-            // R.drawable.sample_6, R.drawable.sample_7,
-            // R.drawable.sample_0, R.drawable.sample_1,
-            // R.drawable.sample_2, R.drawable.sample_3,
-            // R.drawable.sample_4, R.drawable.sample_5,
-            // R.drawable.sample_6, R.drawable.sample_7
-    };
+        };
 }
