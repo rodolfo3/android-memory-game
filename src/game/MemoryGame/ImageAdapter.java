@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import android.os.Handler;
+import android.widget.Toast;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -71,6 +74,7 @@ public class ImageAdapter extends BaseAdapter {
 
     public void installClick(int position) {
         // final int pos = position;
+        final ImageAdapter self = this;
         Log.d("ImageAdapter", "click *" + Integer.toString(position));
         ImageView imageView =(ImageView)  imageViews.get(position);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -79,25 +83,41 @@ public class ImageAdapter extends BaseAdapter {
                 Log.d("ImageAdapter", "click!" + Integer.toString(pos));
                 show(pos);
 
+
                 // FIXME: UI update
                 // http://developer.android.com/resources/articles/timed-ui-updates.html
-                if (piece_up == -1) {
+                if (piece_up == -1 || piece_up == pos) {
                     // first click
                     piece_up = pos;
                 } else {
                     // second click
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException except) {
-                        // none
+                    if (pieces[pos] == pieces[piece_up]) {
+                        // ok, it's equal
+                        Toast.makeText(mContext, "good!", 2).show();
+                        //
+                        // remove click handler
+                        removeClick(pos);
+                        removeClick(piece_up);
+
+                    } else {
+                        // try again
+                        int aux[] = {piece_up, pos};
+                        SleepHide update = new SleepHide(mContext, self, aux);
+                        Handler mHandler = new Handler();
+                        mHandler.postDelayed(update, 2000);
                     }
-                    // hide(position);
-                    // hide(piece_up);
+
                     piece_up = -1;
                 }
 
             }
         });
+    }
+
+    public void removeClick(int position) {
+        ImageView aux;
+        aux = (ImageView) imageViews.get(position);
+        aux.setOnClickListener(null);
     }
 
     public void hide(int position) {
